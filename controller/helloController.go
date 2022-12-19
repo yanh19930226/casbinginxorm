@@ -11,6 +11,7 @@ type HelloController struct{}
 
 // Hello godoc
 //
+// @Security ApiKeyAuth
 // @Summary Hello
 // @Tags hello
 // @Description Hello

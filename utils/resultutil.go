@@ -24,6 +24,31 @@ var MsgFlags = map[int]string{
 	ValidationErrorIssuer:      "ValidationErrorIssuer",
 }
 
+type ResponseMsg struct {
+	Code int         `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
+}
+
+// SuccessMsg
+func Success(data interface{}) *ResponseMsg {
+	msg := &ResponseMsg{
+		Code: SUCCESS,
+		Msg:  "SUCCESS",
+		Data: data,
+	}
+	return msg
+}
+
+// FailMsg
+func Fail(code int) *ResponseMsg {
+	msgObj := &ResponseMsg{
+		Code: code,
+		Msg:  GetMsg(code),
+	}
+	return msgObj
+}
+
 // GetMsg get error information based on Code
 func GetMsg(code int) string {
 	msg, ok := MsgFlags[code]

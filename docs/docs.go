@@ -148,6 +148,11 @@ const docTemplate = `{
         },
         "/api/v1/hello": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Hello",
                 "consumes": [
                     "application/json"

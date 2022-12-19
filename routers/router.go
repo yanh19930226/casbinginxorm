@@ -13,9 +13,15 @@ func InitRouter() *gin.Engine {
 
 	//获取router路由对象
 	r := gin.New()
-
-	//Logger Recovery
-	r.Use(gin.Logger(), gin.Recovery())
+	//文件记录到文件
+	// r.Use(utils.LoggerToFile())
+	//注意 Recover 要尽量放在第一个被加载
+	//如不是的话，在recover前的中间件或路由，将不能被拦截到
+	//程序的原理是：
+	//1.请求进来，执行recover
+	//2.程序异常，抛出panic
+	//3.panic被 recover捕获，返回异常信息，并Abort,终止这次请求
+	r.Use(middleware.Recover())
 
 	//Cors
 	r.Use(middleware.Cors())
@@ -30,6 +36,12 @@ func InitRouter() *gin.Engine {
 	apiv1.GET("/auth/validtoken/{token}", authController.ValidToken)
 	apiv1.POST("/auth/createrefreshtoken", authController.CreateRefreshToken)
 	apiv1.GET("/auth/validrefreshtoken/{refreshtoken}", authController.ValidRefreshToken)
+
+	apiv1.GET("/pingerror", func(c *gin.Context) {
+		// 无意抛出 panic
+		var slice = []int{1, 2, 3, 4, 5}
+		slice[6] = 6
+	})
 
 	//JwtAuthorize
 	apiv1.Use(middleware.JwtAuthorize())

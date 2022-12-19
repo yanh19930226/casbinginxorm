@@ -5,6 +5,7 @@ import (
 	"casbinginxorm/models"
 	"casbinginxorm/routers"
 	"casbinginxorm/service"
+	"casbinginxorm/utils"
 )
 
 func init() {
@@ -33,6 +34,10 @@ func init() {
 // @description                 Description for what is this security definition being used
 
 func main() {
+
+	//init log
+	utils.InitLogger()
+
 	r := routers.InitRouter()
 	r.Run(":9000") //参数为空 默认监听8080端口
 }
