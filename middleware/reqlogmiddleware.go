@@ -19,7 +19,7 @@ var (
 	//日志地址
 	logFilePath = "./"
 	//日志文件名
-	logFileName = "system.log"
+	logFileName = "req.log"
 )
 
 type bodyLogWriter struct {
@@ -68,7 +68,7 @@ func ReqLog() gin.HandlerFunc {
 	//设置输出
 	logger.Out = src
 	// 设置 rotatelogs
-	logWriter, err := rotatelogs.New(
+	logWriter, errrotatelogs := rotatelogs.New(
 		// 分割后的文件名称
 		fileName+".%Y%m%d.log",
 
@@ -81,6 +81,10 @@ func ReqLog() gin.HandlerFunc {
 		// 设置日志切割时间间隔(1天)
 		rotatelogs.WithRotationTime(24*time.Hour),
 	)
+
+	if errrotatelogs != nil {
+		logger.Println("err", err)
+	}
 
 	writeMap := lfshook.WriterMap{
 		logrus.InfoLevel:  logWriter,
