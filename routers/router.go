@@ -10,21 +10,8 @@ import (
 )
 
 func InitRouter() *gin.Engine {
-
 	//获取router路由对象
 	r := gin.New()
-	//文件记录到文件
-	// r.Use(utils.LoggerToFile())
-	//注意 Recover 要尽量放在第一个被加载
-	//如不是的话，在recover前的中间件或路由，将不能被拦截到
-	//程序的原理是：
-	//1.请求进来，执行recover
-	//2.程序异常，抛出panic
-	//3.panic被 recover捕获，返回异常信息，并Abort,终止这次请求
-	r.Use(middleware.Recover())
-
-	//Cors
-	r.Use(middleware.Cors())
 
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 	//Group
