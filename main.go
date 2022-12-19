@@ -2,7 +2,6 @@ package main
 
 import (
 	_ "casbinginxorm/docs"
-	"casbinginxorm/middleware"
 	"casbinginxorm/models"
 	"casbinginxorm/routers"
 	"casbinginxorm/service"
@@ -40,12 +39,6 @@ func main() {
 	utils.InitLogger()
 
 	r := routers.InitRouter()
-
-	//文件记录到文件
-	r.Use(middleware.ReqLog(), middleware.Recover())
-
-	//Cors
-	r.Use(middleware.Cors())
 
 	r.Run(":9000") //参数为空 默认监听8080端口
 }

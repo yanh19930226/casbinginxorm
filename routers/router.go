@@ -13,6 +13,12 @@ func InitRouter() *gin.Engine {
 	//获取router路由对象
 	r := gin.New()
 
+	//文件记录到文件
+	r.Use(middleware.ReqLog(), middleware.Recover())
+
+	//Cors
+	r.Use(middleware.Cors())
+
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 	//Group
 	apiv1 := r.Group("/api/v1")

@@ -1,6 +1,0 @@
-{"level":"debug","msg":"afsfd","time":"2022-12-19 16:34:07"}
-{"level":"debug","msg":"afsfd","time":"2022-12-19 16:35:18"}
-{"level":"info","msg":"| 200 |     24.7783ms |             ::1 | GET | /api/v1/recover","time":"2022-12-19 16:35:18"}
-{"level":"debug","msg":"afsfd","time":"2022-12-19 16:36:30"}
-{"level":"info","msg":"| 200 |       958.1µs |             ::1 | GET | /api/v1/recover","time":"2022-12-19 16:36:30"}
-{"level":"error","msg":"runtime error: index out of range [6] with length 5","time":"2022-12-19 17:34:21"}
